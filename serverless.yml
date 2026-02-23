@@ -1,0 +1,21 @@
+service: testing-sls
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  endpointType: "REGIONAL"
+  apiGateway:
+    shouldStartNameWithService: true
+
+functions:
+  hello:
+    handler: handler.hello
+  helloUser:
+    handler: handler.helloUser
+    events:
+      - http:
+          method: GET
+          path: /user/{name}
